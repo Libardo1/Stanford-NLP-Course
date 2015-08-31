@@ -3,8 +3,9 @@ import os
 import re
 import pprint
 
-my_first_pat = '(\w+)@(\w+).edu'
-
+my_first_pat = '([A-Za-z0-9._-]+)[ ]*(?:@| at |\(at\)|&#x40;|WHERE)[ ]*([A-Za-z0-9._-]+)(?:.| dot | dt | DOM )(edu|com|EDU|COM)'
+#my_phone_pat = '([0-9]{3}|\([0-9]{3}\))[- ]+([0-9]{3})[- ]+([0-9]{4})'
+my_phone_pat = '[\(\[]?([2-9]\d{2})[\)\]-]?\s{0,2}[\(\[]?([0-9]\d{2})[\)\]-]?\s{0,2}(\d{4})'
 """
 TODO
 This function takes in a filename along with the file object (actually
@@ -33,8 +34,13 @@ def process_file(name, f):
     for line in f:
         matches = re.findall(my_first_pat,line)
         for m in matches:
-            email = '%s@%s.edu' % m
+            email = '%s@%s.%s' % m
             res.append((name,'e',email))
+            
+        pmatches = re.findall(my_phone_pat,line)
+        for m in pmatches:
+			phone = '%s-%s-%s' % m
+			res.append((name,'p',phone))
     return res
 
 """
@@ -104,7 +110,9 @@ gold file
 """
 def main(data_path, gold_path):
     guess_list = process_dir(data_path)
+    #print guess_list
     gold_list =  get_gold(gold_path)
+    #print gold_list
     score(guess_list, gold_list)
 
 """
