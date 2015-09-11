@@ -40,5 +40,6 @@ class StupidBackoffLanguageModel:
             score -= log(self.UnigramCounts[prev_token])
         else:
             score += log(countUnigram + 1)
+            #score += log(0.4)
             score -= log(self.total + V)
     return score

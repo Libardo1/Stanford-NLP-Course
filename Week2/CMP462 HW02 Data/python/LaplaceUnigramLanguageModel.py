@@ -15,7 +15,7 @@ class LaplaceUnigramLanguageModel:
     """  
     for sentence in corpus.corpus:
         for datum in sentence.data:
-            token = datum.world
+            token = datum.word
             self.UnigramCounts[token] += 1
             self.total += 1
 
