@@ -99,7 +99,7 @@ class NaiveBayes:
     * TODO
     * Filters stop words found in self.stopList.
     """
-    return words
+    return filter(lambda w: w not in self.stopList, words)
 
   # TODO TODO TODO TODO TODO
   #############################################################################
@@ -295,6 +295,7 @@ if __name__ == "__main__":
     main()
 
 '''
+WITH STOP WORDS
 [INFO]  Performing 10-fold cross-validation on data set:  ../data/imdb1/
 [INFO]  Fold 0 Accuracy: 0.770000
 [INFO]  Fold 1 Accuracy: 0.830000
@@ -308,4 +309,19 @@ if __name__ == "__main__":
 [INFO]  Fold 9 Accuracy: 0.830000
 [INFO]  Accuracy: 0.810500
 [Finished in 15.2s]
+
+WITHOUT STOP WORDS
+[INFO]  Performing 10-fold cross-validation on data set:  ../data/imdb1/
+[INFO]  Fold 0 Accuracy: 0.775000
+[INFO]  Fold 1 Accuracy: 0.825000
+[INFO]  Fold 2 Accuracy: 0.805000
+[INFO]  Fold 3 Accuracy: 0.820000
+[INFO]  Fold 4 Accuracy: 0.800000
+[INFO]  Fold 5 Accuracy: 0.805000
+[INFO]  Fold 6 Accuracy: 0.820000
+[INFO]  Fold 7 Accuracy: 0.825000
+[INFO]  Fold 8 Accuracy: 0.760000
+[INFO]  Fold 9 Accuracy: 0.820000
+[INFO]  Accuracy: 0.805500
+[Finished in 12.0s]
 '''
